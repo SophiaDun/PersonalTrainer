@@ -3,40 +3,62 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  margin-left: auto;
+  margin-left: auto;
+ 
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #484848aa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #6fbdd2aa);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #66a3c0;
 }
+.header{
+  display: flex;
+
+  align-items: center;
+
+
+}
+
+.calendar{
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+}
+
+.gradient-text {
+  background: linear-gradient(to bottom, #9cc6ef, #deabea);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 24px;
+
+}
+
+.custom-appbar {
+  background-color: #ffffff; /* Replace with your desired color */
+}
+
+.cos-button{
+  margin: 20px;
+}
+
+
+
+.custom-appbar {
+  background-color: #1c1c1c;
+ width: 83.6em; /* Adjust the height according to your needs */
+}
+

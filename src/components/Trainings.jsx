@@ -4,7 +4,8 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Snackbar } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import Statistic_Card from './StatisticCard';
 
 function Trainings() {
   const [open, setOpen] = useState(false);
@@ -15,95 +16,63 @@ function Trainings() {
     setOpen(true);
   };
 
-  const deleteTraining = (params) => {
-    const id = params.data.id; 
+  const deleteTraining = async (params) => {
+    const id = params.data.id;
+  
     if (window.confirm('Are you sure?')) {
-      fetch(`https://traineeapp.azurewebsites.net/api/trainings/${id}`, { method: 'DELETE' })
-        .then((response) => {
-          if (response.ok) {
-           
-            setRowData(prevData => prevData.filter((row) => row.id !== id));
-            setMsg('Training deleted');
-            setOpen(true);
-          } else {
-            response.text().then((data) => {
-              setMsg(`Error in deletion: ${response.status} - ${data}`);
-              setOpen(true);
-            });
-          }
-        })
-        .catch((err) => {
-          setMsg(`Error in deletion: ${err.message}`);
-          setOpen(true);
-        });
+      try {
+        await fetch(`https://traineeapp.azurewebsites.net/api/trainings/${id}`, { method: 'DELETE' });
+        setRowData((prevData) => prevData.filter((row) => row.id !== id));
+        setMsg('Training deleted');
+        setOpen(true);
+      } catch (err) {
+        setMsg(`Error in deletion: ${err.message}`);
+        setOpen(true);
+      }
     }
   };
+  
   
   
   const fetchData = () => {
     fetch('https://traineeapp.azurewebsites.net/gettrainings')
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
         return response.json();
       })
       .then((data) => setRowData(data))
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((err) => console.error(err));
   };
   
-  
-  
-  
-  
-  
-  
-
+ 
   useEffect(() => {
     fetchData();
   }, []);
 
 
-
+ 
   const columns = [
-    {
-      cellRenderer: params => (
-        <button size="small" onClick={() => deleteTraining(params)}>
-          Delete
-        </button>
-      ),
-      width: 120,
-    },
-    {
-      headerName: 'Date',
-      field: 'date',
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      maxWidth: 180,
-      cellRenderer: params => (
-        <span>{dayjs(params.data.date).format('DD.MM.YYYY hh:mm A')}</span>
-      ),
-    },
-    { headerName: 'Duration', field: 'duration', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
-    { headerName: 'Activity', field: 'activity', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 ,},
-    {
-      headerName: 'Customer',
-      field: 'customer',
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      maxWidth: 250,
-      cellRenderer: params => (
-        params.data.customer ? `${params.data.customer.firstname} ${params.data.customer.lastname}` : ''
-      ),
-    },
+   
+    { headerName: 'Date',field: 'date', sortable: true, filter: true, floatingFilter: true, width: 300,
+      cellRenderer: (params) => ( <span>{dayjs(params.data.date).format('DD.MM.YYYY hh:mm A')}</span>)},
+      
+    { headerName: 'Duration', field: 'duration', sortable: true, filter: true, floatingFilter: true, width: 270 },
+    { headerName: 'Activity', field: 'activity', sortable: true, filter: true, floatingFilter: true,width: 300 },
+    { headerName: 'Customer', field: 'customer', sortable: true, filter: true,floatingFilter: true, width: 215,
+    cellRenderer: (params) => ( params.data.customer ? `${params.data.customer.firstname} ${params.data.customer.lastname}` : ''),
+    valueFormatter: (params) => (params.data.customer ? `${params.data.customer.firstname} ${params.data.customer.lastname}`: '')},
+
+    //Poista asiakas
+    {cellRenderer: (params) => ( 
+    <button style={{ color: '#565656',background: 'transparent', border: 'none', cursor: 'pointer'}} 
+        onClick={() => deleteTraining(params)}>
+        <RemoveCircleIcon />
+    </button>),width: 250}
   ];
   
 
   return (
     <>
-      <div className="ag-theme-alpine" style={{ height: '700px', width: '93em', margin: 'auto' }}>
+      <div className="ag-theme-alpine-dark" style={{ height: '700px', width: '103em' }} >
         <AgGridReact
           rowData={rowData}
           columnDefs={columns}
@@ -111,6 +80,7 @@ function Trainings() {
           pagination={true}
           onGridReady={() => fetchData()}
         />
+        <Statistic_Card/>
         <Snackbar
           open={open}
           autoHideDuration={3000}
@@ -118,6 +88,7 @@ function Trainings() {
           message={msg}
         />
       </div>
+      
     </>
   );
 }

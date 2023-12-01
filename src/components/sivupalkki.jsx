@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -16,16 +15,13 @@ import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 export default function TemporaryDrawer() {
-  const [state, setState] = useState({
-    left: false,
-  });
+  const [state, setState] = useState({left: false});
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
+      return; 
+    } 
+      setState({ ...state, [anchor]: open });
   };
 
   const list = (anchor) => (
@@ -38,7 +34,7 @@ export default function TemporaryDrawer() {
       <List>
         {['Customers', 'Trainings', 'Calendar'].map((text, index) => (
           <ListItem key={text} disablePadding>
-             <Link to={`./${text.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+             <Link to={`/${text.toLowerCase()}`} style={{ textDecoration: 'none', color: 'inherit' }}>
               <ListItemButton>
                 <ListItemIcon>
                   {index === 0 ? <AccountCircleIcon /> : (index === 1 ? <DirectionsRunIcon /> : <CalendarMonthIcon />)}
@@ -56,9 +52,9 @@ export default function TemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>
-            <MenuIcon sx={{ color: 'white' }} />
-          </Button>
+          <button style={{color:'white', background: 'transparent', border: 'none', cursor: 'pointer'}} onClick={toggleDrawer(anchor, true)}>
+            <MenuIcon fontSize='large' />
+          </button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

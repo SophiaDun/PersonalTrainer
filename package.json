@@ -10,13 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ag-grid-enterprise/all-modules": "^27.3.0",
+    "@ant-design/icons": "^5.2.6",
+    "@fullcalendar/core": "^6.1.9",
+    "@fullcalendar/daygrid": "^6.1.9",
+    "@fullcalendar/react": "^6.1.9",
+    "@fullcalendar/timegrid": "^6.1.9",
     "@mui/x-date-pickers": "^6.18.2",
     "ag-grid-community": "^30.2.1",
     "ag-grid-react": "^30.2.1",
+    "antd": "^5.11.5",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
+    "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "react-table": "^7.8.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

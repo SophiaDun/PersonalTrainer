@@ -5,6 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import React, { useState } from 'react';
 import DialogTitle from '@mui/material/DialogTitle';
+import EditIcon from '@mui/icons-material/Edit';
+
+
 
 
 
@@ -62,15 +65,12 @@ const handleClickOpen = () => {
         }
       };
     
-    
-  
-  
-
+   
     return(
         <>
-           <Button onClick={handleClickOpen}>
-        Edit
-      </Button>
+           <button  style={{ color: '#bc8ec7',background: 'transparent', border: 'none', cursor: 'pointer'}} onClick={handleClickOpen}>
+           <EditIcon  />
+      </button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Edit person</DialogTitle>
         <DialogContent>

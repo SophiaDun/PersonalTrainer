@@ -5,16 +5,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
-
-
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-
-
-
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
 
 export default function AddTraining(props) {
   const [open, setOpen] = useState(false);
@@ -40,7 +35,7 @@ export default function AddTraining(props) {
     setTraining({ ...training, [event.target.name]: event.target.value });
   };
 
-  const addTraining = () => {
+  const addTraining = () => { // kutsuu customers saveTrainings
     const trainingData = {
       ...training,
       customer: props.customerUrl,
@@ -52,9 +47,9 @@ export default function AddTraining(props) {
 
   return (
     <>
-      <Button style={{ margin: 10 }} variant="outlined" onClick={handleClickOpen}>
-        Add Training
-      </Button>
+      <button  style={{ color:'#6cc586',background: 'transparent', border: 'none', cursor: 'pointer'}} onClick={handleClickOpen}>
+      <DirectionsRunIcon />+
+      </button>
 
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Training</DialogTitle>
