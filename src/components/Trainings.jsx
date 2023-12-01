@@ -2,7 +2,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Snackbar } from '@mui/material';
-import React, { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import Statistic_Card from './StatisticCard';

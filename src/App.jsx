@@ -1,12 +1,10 @@
 import React from 'react';
-import { AppBar, Typography, Toolbar } from '@mui/material';
+import { AppBar} from '@mui/material';
 import TemporaryDrawer from './components/Sivupalkki';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Customers from './components/Customers';
 import Trainings from './components/Trainings';
 import Calendar from './components/Calendar';
-
-
 import SportsVolleyballIcon from '@mui/icons-material/SportsVolleyball';
 import './App.css'
 

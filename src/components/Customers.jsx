@@ -3,9 +3,9 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { Snackbar } from '@mui/material';
 import AddTrainning from './AddTrainning';
-import AddCustomor from './addCustomor';
-import EditCustomer from './editCustomor';
-import React, { useState, useEffect } from 'react';
+import AddCustomor from './AddCustomor';
+import EditCustomer from './EditCustomor';
+import React,{ useState, useEffect } from 'react';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 
