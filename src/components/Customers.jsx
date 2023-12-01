@@ -134,9 +134,9 @@ function Customers() {
 
   const columns = [
 
-    { headerName: 'Firstname', field: 'firstname', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
-    { headerName: 'Lastname', field: 'lastname', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
-    { headerName: 'Streetaddress', field: 'streetaddress', sortable: true, filter: true, floatingFilter: true, width: 200 },
+    { headerName: 'First Name', field: 'firstname', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
+    { headerName: 'Last Name', field: 'lastname', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
+    { headerName: 'Street Address', field: 'streetaddress', sortable: true, filter: true, floatingFilter: true, width: 200 },
     { headerName: 'Postcode', field: 'postcode', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
     { headerName: 'City', field: 'city', sortable: true, filter: true, floatingFilter: true, maxWidth: 150 },
     { headerName: 'Email', field: 'email', sortable: true, filter: true, floatingFilter: true, width: 210 },
@@ -191,17 +191,16 @@ function Customers() {
           message={msg}
         />
        
-<CSVLink data={rowData} headers={headers} filename={'customer_data.csv'}>
-<FloatButton
-       
+      <CSVLink data={rowData} headers={headers} filename={'customer_data.csv'}>
+
+      <FloatButton
         tooltip={<div>Export CSV</div>}
         shape="circle"
         type="black"
-        style={{right: 260,bottom:70}}
+        style={{right: 350,bottom:70}}
         icon={<DownloadOutlined style={{ color: '#ffffff', background: 'transparent', border: 'none', cursor: 'pointer' }} />}
       />
-    
-</CSVLink>
+      </CSVLink>
 
 
 

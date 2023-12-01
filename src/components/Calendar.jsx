@@ -14,12 +14,21 @@ const Calendar = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
- 
-        const formattedEvents = data.map((training) => ({
-          title: `${training.activity} - ${training.customer.firstname} ${training.customer.lastname}`,
-          start: training.date,
-          end: training.endDate,
-        }));
+
+        const formattedEvents = data.map((training) => {
+      
+          //Tarkistaa onko asiakkaan nimi olemassa, jos ei tule mitään nimen tilalle
+          const customerName = training.customer && training.customer.firstname
+            ? `${training.customer.firstname} ${training.customer.lastname || ''}`
+            : '';
+
+          return {
+            title: `${training.activity} - ${customerName}`,
+            start: training.date,
+         
+          };
+        });
+
         setEvents(formattedEvents);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -30,9 +39,17 @@ const Calendar = () => {
   }, []);
 
   return (
-    <div style={{ width: '83.6em',background:'white' }}> {/* Set the desired width */}
-      <FullCalendar contentHeight='1200px' plugins={[dayGridPlugin, timeGridPlugin]} initialView="timeGridWeek" events={events} />
-  </div>
+    <div style={{ width: '83.6em', background: 'white' }}>
+      <FullCalendar
+        eventMinHeight={100}
+        eventColor='black'
+        contentHeight='1200px'
+        plugins={[dayGridPlugin, timeGridPlugin]}
+        initialView="timeGridWeek"
+        events={events}
+        
+      />
+    </div>
   );
 };
 

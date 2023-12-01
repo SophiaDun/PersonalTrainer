@@ -39,7 +39,7 @@ export default function AddCustomor(props) {
         tooltip={<div>Add customer</div>}
         shape="circle"
         type="black"
-        style={{right: 190,bottom:70}}
+        style={{right: 250,bottom:70}}
         icon={<UserAddOutlined style={{ color: '#ffffff', background: 'transparent', border: 'none', cursor: 'pointer' }} />}
       />
 
@@ -55,7 +55,7 @@ export default function AddCustomor(props) {
             name="firstname"
             value={person.firstname}
             onChange={e => handleInputChange(e)}
-            label="Firstname"
+            label="First Name"
             fullWidth
             variant="standard"
           />
@@ -64,7 +64,7 @@ export default function AddCustomor(props) {
             name="lastname"
             value={person.lastname}
             onChange={e => handleInputChange(e)}
-            label="Lastname"
+            label="Last Name"
             fullWidth
             variant="standard"
           />
@@ -73,7 +73,7 @@ export default function AddCustomor(props) {
             name="streetaddress"
             value={person.streetaddress}
             onChange={e => handleInputChange(e)}
-            label="Street address"
+            label="Street Address"
             fullWidth
             variant="standard"
           />
