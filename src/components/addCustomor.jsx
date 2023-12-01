@@ -39,7 +39,7 @@ export default function AddCustomor(props) {
         tooltip={<div>Add customer</div>}
         shape="circle"
         type="black"
-        style={{right: 94,}}
+        style={{right: 190,bottom:70}}
         icon={<UserAddOutlined style={{ color: '#ffffff', background: 'transparent', border: 'none', cursor: 'pointer' }} />}
       />
 

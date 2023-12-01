@@ -7,6 +7,9 @@ import AddCustomor from './AddCustomor';
 import EditCustomer from './EditCustomor';
 import React,{ useState, useEffect } from 'react';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { CSVLink } from "react-csv";
+import { FloatButton } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
 
 
 function Customers() {
@@ -48,9 +51,14 @@ function Customers() {
       },
       body: JSON.stringify(trainingData),
     })
-      .then(() => fetchData())
+      .then(() => {
+        fetchData();
+        setMsg('Saved training');
+        setOpen(true);
+      })
       .catch((err) => console.error(err));
   };
+  
 
 
 
@@ -62,23 +70,36 @@ function Customers() {
       },
       body: JSON.stringify(person),
     })
-      .then(() => fetchData())
-      .catch((err) => console.error(err));
+    .then(() => {
+      fetchData();
+      setMsg('Saved new customer');
+      setOpen(true);
+    })
+    .catch((err) => console.error(err));
   };
 
 
 
   const updateCustomer = (editedPerson) => {
-      const id = editedPerson.id;
+    const id = editedPerson.id;
   
-      fetch(`https://traineeapp.azurewebsites.net/api/customers/${id}`, {
+    fetch(`https://traineeapp.azurewebsites.net/api/customers/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(editedPerson),
     })
-      .then((response) => response.ok ? setKey(prevKey => prevKey + 1) : Promise.reject(`Error updating customer: ${response.status} - ${response.statusText}`))
+      .then((response) => {
+        if (response.ok) {
+          setKey((prevKey) => prevKey + 1);
+          setMsg('Updated customer');
+          setOpen(true);
+        } else {
+          return Promise.reject(`Error updating customer: ${response.status} - ${response.statusText}`);
+        }
+      })
       .catch((err) => console.error(err));
   };
+  
   
 
 
@@ -96,6 +117,18 @@ function Customers() {
   useEffect(() => {
     fetchData();
   }, []);
+
+
+
+  const headers = [
+    { label: 'First Name', key: 'firstname' },
+    { label: 'Last Name', key: 'lastname' },
+    { label: 'Street Address', key: 'streetaddress' },
+    { label: 'Postcode', key: 'postcode' },
+    { label: 'City', key: 'city' },
+    { label: 'Email', key: 'email' },
+    { label: 'Phone', key: 'phone' },
+  ];
 
 
 
@@ -157,6 +190,20 @@ function Customers() {
           onClose={() => setOpen(false)}
           message={msg}
         />
+       
+<CSVLink data={rowData} headers={headers} filename={'customer_data.csv'}>
+<FloatButton
+       
+        tooltip={<div>Export CSV</div>}
+        shape="circle"
+        type="black"
+        style={{right: 260,bottom:70}}
+        icon={<DownloadOutlined style={{ color: '#ffffff', background: 'transparent', border: 'none', cursor: 'pointer' }} />}
+      />
+    
+</CSVLink>
+
+
 
         <AddCustomor saveCustomer={saveCustomer} />
       </div>

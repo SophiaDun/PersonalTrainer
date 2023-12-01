@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -14,7 +14,7 @@ const Calendar = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        // Muuttaa training datan eventiksi
+ 
         const formattedEvents = data.map((training) => ({
           title: `${training.activity} - ${training.customer.firstname} ${training.customer.lastname}`,
           start: training.date,
@@ -30,11 +30,10 @@ const Calendar = () => {
   }, []);
 
   return (
-    <div className="calendar"style={{ width: '83.6em' }}> 
-      <FullCalendar contentHeight='800px' plugins={[dayGridPlugin, timeGridPlugin]} initialView="timeGridWeek" events={events} />
+    <div style={{ width: '83.6em',background:'white' }}> {/* Set the desired width */}
+      <FullCalendar contentHeight='1200px' plugins={[dayGridPlugin, timeGridPlugin]} initialView="timeGridWeek" events={events} />
   </div>
   );
 };
 
 export default Calendar;
-

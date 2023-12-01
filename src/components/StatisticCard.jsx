@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import { Card, Col, Row, Statistic } from 'antd';
 
@@ -10,18 +10,13 @@ const Statistic_Card = () => {
 
 
   const fetchData = () => {
-
     fetch('https://traineeapp.azurewebsites.net/api/customers')
-      .then((response) => {
-       return response.json();
-      })
-      
+      .then((response) => response.json())
       .then((customerData) => {
         const customers = customerData.content;
         const totalCustomers = customers.length;
         setTotalCustomers(totalCustomers);
-
-        
+  
         fetch('https://traineeapp.azurewebsites.net/gettrainings')
           .then((response) => {
             if (!response.ok) {
@@ -30,19 +25,23 @@ const Statistic_Card = () => {
             return response.json();
           })
           .then((trainingData) => {
-            // Tarkista trainingData.content onko tyhjä vai ei
+            
             const trainingArray = Array.isArray(trainingData) ? trainingData : [];
-
-            // Hae asiakkaiden id
-            const uniqueCustomerIdsInTraining = new Set(trainingArray.map((training) => training.customer.id));
-
-            // laske inTrainingCount
+  
+            // Ota id asiakkaalta
+            const uniqueCustomerIdsInTraining = new Set(
+              trainingArray
+                .filter((training) => training.customer && training.customer.id)
+                .map((training) => training.customer.id)
+            );
+  
+            
             const inTrainingCount = uniqueCustomerIdsInTraining.size;
-
-            // laske notInTrainingCount 
+  
+     
             const notInTrainingCount = totalCustomers - inTrainingCount;
-
-            // Vaihda state
+  
+           
             setInTrainingCount(inTrainingCount);
             setNotInTrainingCount(notInTrainingCount);
           })
@@ -54,6 +53,7 @@ const Statistic_Card = () => {
         console.error('Error fetching customer data:', customerError)
       );
   };
+  
 
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const Statistic_Card = () => {
             valueStyle={{
               color: '#3f8600',
             }}
-            suffix={`(${inTrainingPercentage}%)`}
+            suffix={`(${inTrainingPercentage.toFixed(0)}%)`}
             prefix={<ArrowUpOutlined />}
           />
         </Card>
@@ -89,7 +89,7 @@ const Statistic_Card = () => {
             valueStyle={{
               color: '#cf1322',
             }}
-            suffix={`(${notInTrainingPercentage}%)`}
+            suffix={`(${notInTrainingPercentage.toFixed(0)}%)`}
             prefix={<ArrowDownOutlined />}
           />
         </Card>
