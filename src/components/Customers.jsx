@@ -191,7 +191,7 @@ function Customers() {
           message={msg}
         />
        
-      <CSVLink data={rowData} headers={headers} filename={'customer_data.csv'}>
+      <CSVLink data={rowData} headers={headers} filename={'customers.csv'}>
 
       <FloatButton
         tooltip={<div>Export CSV</div>}
